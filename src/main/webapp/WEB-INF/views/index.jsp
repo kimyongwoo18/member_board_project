@@ -9,14 +9,34 @@
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <html>
 <head>
-    <title>indec</title>
+    <title>index</title>
+    <style>
+        #page {
+            width: 800px;
+            margin-top: 30px;
+
+        }
+    </style>
 </head>
 <body>
-회원가입, 로그인, 글목록으로 가는 버튼(또는 링크) 있음.
 
+<div class="container-fluid text-center" id="page">
+<h2>회원제게시판</h2>
 <button class="btn btn-primary" onclick="saveFn()">회원가입</button>
-<button class="btn btn-primary" onclick="loginFn()">로그인</button>
+<button class="btn btn-secondary" onclick="loginFn()">로그인</button>
 <button class="btn btn-success" onclick="listFn()">글목록</button>
+</div>
 
 </body>
+<script>
+    const saveFn = () => {
+        location.href = "/save";
+    }
+    const loginFn = () => {
+        location.href = "/login";
+    }
+    const listFn = () => {
+        location.href = "/board/";
+    }
+</script>
 </html>

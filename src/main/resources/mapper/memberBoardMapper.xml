@@ -4,11 +4,12 @@
 
 
 <mapper namespace="Member">
-<!--    <insert id="save" parameterType="memberDTO">-->
-<!--        insert into book_table1(bookName, bookAuthor, bookPrice, bookPublisher) values(#{bookName},#{bookAuthor},#{bookPrice},#{bookPublisher})-->
-<!--    </insert>-->
+    <insert id="save" parameterType="memberDTO">
+        insert into member_table2(memberEmail, memberPassword, memberName, memberMobile)
+        values(#{memberEmail},#{memberPassword},#{memberName},#{memberMobile})
+    </insert>
 
-<!--    <select id="findBook" resultType="memberDTO">-->
-<!--        select * from book_table1 where bookId=2-->
-<!--    </select>-->
+    <select id="findByEmail" resultType="memberDTO" >
+        select * from member_table2 where memberEmail=#{memberEmail}
+    </select>
 </mapper>
