@@ -24,7 +24,7 @@ public class BoardDTO {
     // 원본파일 이름용 필드
     private String originalFileName;
     // 서버관리 이름용 필드
-    private String StoredFileName;
+    private String storedFileName;
 
 
 }

@@ -19,8 +19,8 @@ public class MemberDTO {
     // 원본사진 이름용 필드
     private String originalProfileName;
     // 서버관리 이름용 필드
-    private String StoredProfileName;
+    private String storedProfileName;
     //사진이 있나없나 확인하는 필드 0이면 없음 1이면 있음.
-    private int ProfileAttached;
+    private int profileAttached;
 
 }

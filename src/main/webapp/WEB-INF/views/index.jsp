@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <html>
 <head>
@@ -14,7 +15,6 @@
         #page {
             width: 800px;
             margin-top: 30px;
-
         }
     </style>
 </head>
