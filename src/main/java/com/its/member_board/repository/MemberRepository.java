@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class MemberRepository {
@@ -30,8 +31,8 @@ public class MemberRepository {
         sql.insert("Member.saveProfile", memberDTO);
     }
 
-    public List<MemberDTO> findAll(int page) {
-        return sql.selectList("Member.findAll",page);
+    public List<MemberDTO> findAll() {
+        return sql.selectList("Member.findAll");
     }
 
     public int memberCount() {
@@ -44,5 +45,17 @@ public class MemberRepository {
 
     public void updateProfileName(MemberDTO memberDTO) {
         sql.update("Member,updateProfile",memberDTO);
+    }
+
+    public void delete(Long id) {
+        sql.delete("Member.delete",id);
+    }
+
+    public List<MemberDTO> findFile() {
+        return sql.selectList("Member.findFile");
+    }
+
+    public List<MemberDTO> pagingList(Map<String, Integer> pagingParams) {
+        return sql.selectList("Member.pagingList", pagingParams);
     }
 }

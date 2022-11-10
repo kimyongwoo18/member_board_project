@@ -1,6 +1,7 @@
 package com.its.member_board.service;
 
 import com.its.member_board.common.PagingConst;
+
 import com.its.member_board.dto.MemberDTO;
 import com.its.member_board.dto.PageDTO;
 import com.its.member_board.repository.MemberRepository;
@@ -10,7 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MemberService {
@@ -36,18 +39,20 @@ public class MemberService {
         if(!memberDTO.getMemberProfile().isEmpty()) {
             System.out.println("파일있음");
             MultipartFile memberFile = memberDTO.getMemberProfile(); //1.
-            String originalProfilename = memberFile.getOriginalFilename(); //2.
-            System.out.println("originalProfilename = " + originalProfilename);
+            String originalFilename = memberFile.getOriginalFilename(); //2.
+            System.out.println("originalFilename = " + originalFilename);
             System.out.println(System.currentTimeMillis());
-            String storedFileName = System.currentTimeMillis() + "-" + originalProfilename; //3.
+            String storedFileName = System.currentTimeMillis() + "-" + originalFilename; //3.
             System.out.println("storedFileName = " + storedFileName);
-            memberDTO.setOriginalProfileName(originalProfilename);
-            memberDTO.setStoredProfileName(storedFileName); //4.
+            memberDTO.setOriginalFileName(originalFilename);
+            memberDTO.setStoredFileName(storedFileName); //4.
             String savePath = "D:\\spring_img\\" + storedFileName; //5.
             memberFile.transferTo(new File(savePath));//6.
             memberDTO.setProfileAttached(1);
-            MemberDTO savedMember = memberRepository.save(memberDTO); //7.
-            memberRepository.saveProfileName(savedMember);
+            memberRepository.save(memberDTO); //7.
+            MemberDTO member = memberRepository.findByEmail(memberDTO.getMemberEmail());
+            memberDTO.setId(member.getId());
+            memberRepository.saveProfileName(memberDTO);
         } else {
             System.out.println("파일없음");
             memberDTO.setProfileAttached(0);
@@ -64,8 +69,8 @@ public class MemberService {
         }
     }
 
-    public List<MemberDTO> findAll(int page) {
-        List<MemberDTO> result = memberRepository.findAll(page);
+    public List<MemberDTO> findAll() {
+        List<MemberDTO> result = memberRepository.findAll();
         return result;
     }
 
@@ -93,13 +98,13 @@ public class MemberService {
         if(!memberDTO.getMemberProfile().isEmpty()) {
             System.out.println("파일있음");
             MultipartFile memberFile = memberDTO.getMemberProfile(); //1.
-            String originalProfilename = memberFile.getOriginalFilename(); //2.
-            System.out.println("originalProfilename = " + originalProfilename);
+            String originalFilename = memberFile.getOriginalFilename(); //2.
+            System.out.println("originalFilename = " + originalFilename);
             System.out.println(System.currentTimeMillis());
-            String storedFileName = System.currentTimeMillis() + "-" + originalProfilename; //3.
+            String storedFileName = System.currentTimeMillis() + "-" + originalFilename; //3.
             System.out.println("storedFileName = " + storedFileName);
-            memberDTO.setOriginalProfileName(originalProfilename);
-            memberDTO.setStoredProfileName(storedFileName); //4.
+            memberDTO.setOriginalFileName(originalFilename);
+            memberDTO.setStoredFileName(storedFileName); //4.
             String savePath = "D:\\spring_img\\" + storedFileName; //5.
             memberFile.transferTo(new File(savePath));//6.
             memberDTO.setProfileAttached(1);
@@ -111,5 +116,23 @@ public class MemberService {
             memberRepository.update(memberDTO);
         }
 
+    }
+
+    public void delete(Long id) {
+        memberRepository.delete(id);
+    }
+
+    public List<MemberDTO> findFile() {
+         List<MemberDTO> memberFile = memberRepository.findFile();
+        return memberFile;
+    }
+
+    public List<MemberDTO> pagingList(int page) {
+        int pagingStart = (page-1) * PagingConst.PAGE_LIMIT;
+        Map<String, Integer> pagingParams = new HashMap<>();
+        pagingParams.put("start", pagingStart);
+        pagingParams.put("limit", PagingConst.PAGE_LIMIT);
+        List<MemberDTO> pagingList = memberRepository.pagingList(pagingParams);
+        return pagingList;
     }
 }

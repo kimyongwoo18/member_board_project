@@ -11,13 +11,23 @@
 <html>
 <head>
     <title>boardSave</title>
+    <style>
+        #page {
+            width: 800px;
+            margin-top: 30px;
+        }
+        #boardContents{
+            width: 800px;
+            height: 400px;
+          }
+    </style>
 </head>
 <body>
-<div class="container">
-<form action="/memberSave" method="post" name="saveForm" id="saveForm">
+<div class="container" id="page">
+<form action="/boardSave" method="post" name="saveForm" id="saveForm" enctype="multipart/form-data">
     <input type="text" class="form-control mb-2" id="boardTitle" name="boardTitle" placeholder="제목">
-    <input type="text" name="boardWriter" value="${sessionScope.loginEmail}" readonly>
-    <textarea name="boardContents" id="" cols="30" rows="10"></textarea>
+    <input type="text" name="boardWriter" class="form-control" value="${sessionScope.loginEmail}" readonly>
+    <textarea name="boardContents" class="form-control" id="boardContents" cols="30" rows="10"></textarea>
     <input type="file" class="form-control mb-2" id="boardFileName" name="boardFileName">
     <input type="button"  onclick="save()" class="btn btn-primary form-control mb-2" value="작성완료">
 </form>

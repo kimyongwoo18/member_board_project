@@ -20,20 +20,22 @@
     </style>
 </head>
 <body>
+
 <div class="container-fluid text-center" id="page">
-    <form action="/save" method="post" name="saveForm" id="saveForm">
+    <form action="/memberSave" method="post" name="saveForm" id="saveForm" enctype="multipart/form-data">
         <input type="text" class="form-control mb-2" id="memberEmail" name="memberEmail" placeholder="이메일 입력" onblur="emailCheck()">
         <h6 id="emailCheckResult"></h6>
         <input type="password" class="form-control mb-2" id="memberPassword" name="memberPassword" placeholder="비밀번호 입력">
         <input type="text" class="form-control mb-2" id="memberName" name="memberName" placeholder="이름 입력">
         <input type="text" class="form-control mb-2" id="memberMobile" name="memberMobile" placeholder="전화번호 입력">
         <input type="file" class="form-control mb-2" id="memberProfile" name="memberProfile">
-        <input type="button"  onclick="save()" class="btn btn-primary form-control mb-2" value="가입">
+        <input type="button"  onclick="saveFn()" class="btn btn-primary form-control mb-2" value="가입">
     </form>
 </div>
 </body>
+
 <script>
-    const save = () => {
+    const saveFn = () => {
         if(document.getElementById("memberEmail").value==""){
             alert("이메일을 입력해주세요")
             return false;
@@ -47,6 +49,7 @@
             alert("전화번호를 입력해주세요")
             return false;
         }else{
+            console.log("제출")
             document.saveForm.submit();
         }
     }

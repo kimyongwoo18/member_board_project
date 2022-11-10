@@ -21,6 +21,7 @@ import java.util.List;
 public class BoardControll {
     @Autowired
     private BoardService boardService;
+    @Autowired
     private CommentService commentService;
 
     @GetMapping("/board/")
@@ -47,7 +48,7 @@ public class BoardControll {
         System.out.println("조회 : boardDTO = " + boardDTO);
         List<CommentDTO> commentDTOList = commentService.findAll(id);
         model.addAttribute("commentList", commentDTOList);
-        return "boardPages/boardDetail";
+        return "boardDetail";
     }
     @GetMapping("/boardSave")
     public String saveForm(){

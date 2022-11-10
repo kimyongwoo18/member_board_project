@@ -20,6 +20,9 @@
     <select id="findAll" resultType="memberDTO" >
         select * from member_table2
     </select>
+    <select id="pagingList" parameterType="java.util.HashMap" resultType="memberDTO">
+        select * from member_table2 order by id desc limit #{start}, #{limit}
+    </select>
 
     <select id="memberCount" resultType="Integer">
         select count(id) from member_table2;
@@ -34,4 +37,10 @@
     <update id="updateProfile" parameterType="memberDTO">
         update member_profile_table2 set originalFileName = #{originalFileName} , storedFileName=#{storedFileName} where id = #{id}
     </update>
+    <delete id="delete" parameterType="Long">
+        DELETE FROM member_table2 WHERE id = #{id};
+    </delete>
+    <select id="findFile" resultType="memberDTO">
+        select * from member_profile_table2;
+    </select>
 </mapper>

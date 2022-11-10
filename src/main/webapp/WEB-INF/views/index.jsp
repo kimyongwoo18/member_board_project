@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <html>
 <head>
@@ -21,10 +22,17 @@
 <body>
 
 <div class="container-fluid text-center" id="page">
-<h2>회원제게시판</h2>
-<button class="btn btn-primary" onclick="saveFn()">회원가입</button>
-<button class="btn btn-secondary" onclick="loginFn()">로그인</button>
-<button class="btn btn-success" onclick="listFn()">글목록</button>
+    <h2>회원제게시판</h2>
+    <h4>FOR ONLY MEMBERS</h4>
+    <h6>로그인 후에 글 목록 조회 및 작성 가능합니다.</h6>
+<c:if test="${sessionScope.loginEmail != null}">
+    <h6>${sessionScope.loginName}님 환영합니다.</h6>
+</c:if>
+    <button class="btn btn-primary" onclick="saveFn()">회원가입</button>
+    <button class="btn btn-secondary" onclick="loginFn()">로그인</button>
+    <c:if test="${sessionScope.loginEmail != null}">
+        <button class="btn btn-success" onclick="listFn()">글목록</button>
+    </c:if>
 </div>
 
 </body>

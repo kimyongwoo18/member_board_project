@@ -22,7 +22,10 @@
             <th>비밀번호</th>
             <th>이름</th>
             <th>전화번호</th>
-
+            <th>프로필사진</th>
+            <c:if test="${sessionScope.loginEmail == 'admin'}">
+                <th>회원정보삭제</th>
+            </c:if>
         </tr>
         <c:forEach items="${memberList}" var="member">
             <tr>
@@ -41,19 +44,27 @@
                 <td>
                     ${member.memberMobile}
                 </td>
-            </tr>
-            <c:if test="${member.storedProfileName != null}">
-                <tr>
-                    <th>프로필사진</th>
+                <c:if test="${member.profileAttached == 1}">
                     <td>
-                        <img src="${pageContext.request.contextPath}/upload/${member.storedProfileName}"
+                        <img src="${pageContext.request.contextPath}/upload/${member.storedFileName}"
                              alt="" width="100" height="100">
                     </td>
-                </tr>
-            </c:if>
+                </c:if>
+                <c:if test="${member.profileAttached == 0}">
+                    <td>
+                        프로필사진x
+                    </td>
+                </c:if>
+                <c:if test="${sessionScope.loginEmail == 'admin'}">
+                    <td>
+                        <input type="button" class="btn btn-danger" onclick="location.href='/memberDelete?id=${member.id}'" value="삭제">
+                    </td>
+                </c:if>
+            </tr>
+
         </c:forEach>
     </table>
-    <button class="brn btn-dark" onclick="index()">초기화면</button>
+    <button class="brn btn-dark" onclick="location.href='/'">초기화면</button>
 </div>
 <div class="container">
     <ul class="pagination justify-content-center">
@@ -105,4 +116,5 @@
     </ul>
 </div>
 </body>
+
 </html>

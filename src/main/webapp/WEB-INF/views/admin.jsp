@@ -11,12 +11,22 @@
 <html>
 <head>
     <title>admin</title>
+    <style>
+        #page {
+            width: 800px;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
-<button class="btn btn-success" onclick="memberlist()">회원목록</button>
+<div class="container" id="page">
+<button class="btn btn-success" onclick="memberList()">회원목록</button>
+
+</div>
 </body>
 <script>
     const memberList = () => {
+
       location.href="/member/"
     }
 </script>

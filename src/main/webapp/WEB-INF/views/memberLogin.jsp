@@ -22,17 +22,26 @@
 <body>
 <%--아이디 비밀번호 입력 후 세션으로 로그인 상태 유지 로그인 하면 페이징 처리 된 글목록 화면으로 간다--%>
 <div class="container-fluid" id="page">
-    <form action="/login" method="post" id="loginForm">
+    <form action="/login" method="post" name="loginForm" id="loginForm">
         <input type="text" name="memberEmail" id="memberEmail" class="form-control" placeholder="이메일 입력" maxlength="50">
-        <input type="password" name="memberPassword" class="form-control" placeholder="비밀번호 입력" maxlength="30">
+        <input type="password" name="memberPassword" id="memberPassword" class="form-control" placeholder="비밀번호 입력" maxlength="30">
         <input type="button" onclick="loginFn()" class="btn btn-primary" value="로그인">
     </form>
 </div>
 </body>
 <script>
     const loginFn = () => {
-           const Email = document.getElementById("memberEmail").value;
-                location.href="/board/";
+        console.log("이메일 길이"+document.getElementById("memberEmail").value.length);
+        console.log("비밀번호 길이"+document.getElementById("memberPassword").value.length);
+           if(document.getElementById("memberEmail").value.length == 0){
+               alert("이메일을 입력해주세요");
+               return false;
+           }else if(document.getElementById("memberPassword").value.length == 0){
+               alert("비밀번호를 입력해주세요");
+               return false;
+           }else{
+               document.loginForm.submit();
+           }
     }
 </script>
 

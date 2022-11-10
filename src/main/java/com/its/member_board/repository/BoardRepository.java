@@ -29,7 +29,7 @@ public class BoardRepository {
     }
 
     public BoardDTO findById(long id) {
-        return sql.selectOne("Board.findByid",id);
+        return sql.selectOne("Board.findById",id);
     }
 
     public BoardDTO save(BoardDTO boardDTO) {
