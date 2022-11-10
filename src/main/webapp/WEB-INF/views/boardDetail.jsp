@@ -13,6 +13,8 @@
 <html>
 <head>
     <title>boardDetail</title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="/resources/js/jquery.js"></script>
 </head>
 <body>
 <div class="container">
@@ -47,7 +49,7 @@
       </tr>
     </c:if>
   </table>
-  <c:if test="${board.boardWriter.equals(sessionScope.loginName)}">
+  <c:if test="${board.boardWriter.equals(sessionScope.loginEmail)}">
     <button class="btn btn-success" onclick="updateFn()">수정</button>
     <button class="btn btn-danger" onclick="deleteFn()">삭제</button>
   </c:if>
@@ -56,14 +58,11 @@
   </c:if>
 </div><div class="container mt-5" id="comment-write" >
   <div class="input-group-sm mb-3">
-    <div class="form-floating">
-      <input type="text" id="commentWriter" class="form-control" placeholder="작성자">
-      <label for="commentWriter">작성자</label>
-    </div>
-    <div class="form-floating">
+
+      <input type="text" id="commentWriter" class="form-control" placeholder="작성자"
+             value="${sessionScope.loginName}">
+
       <input type="text" id="commentContents" class="form-control" placeholder="내용">
-      <label for="commentContents">내용</label>
-    </div>
     <button id="comment-write-btn" class="btn btn-secondary" onclick="commentWrite()">댓글작성</button>
     <%-- commentWrite 버튼을 클릭하면 작성자, 내용, 글번호 정보를  --%>
   </div>

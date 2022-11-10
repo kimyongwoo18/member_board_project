@@ -14,4 +14,8 @@ public class CommentRepository {
     public List<CommentDTO> findAll(long boardId) {
         return sql.selectList("Comment.findAll",boardId);
     }
+
+    public void save(CommentDTO commentDTO) {
+        sql.insert("Comment.save", commentDTO);
+    }
 }

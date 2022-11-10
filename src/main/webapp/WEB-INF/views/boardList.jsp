@@ -12,6 +12,7 @@
 <html>
 <head>
     <title>boardList</title>
+    <script src="/resources/js/jquery.js"></script>
     <style>
         #list{
             margin-top: 30px;
