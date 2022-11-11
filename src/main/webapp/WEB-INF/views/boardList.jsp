@@ -18,15 +18,32 @@
             margin-top: 30px;
         }
         #inputBoard{
-
+            width:1000px;
+        }
+        #searchBoard{
+            width : 400px;
+        }
+        .select{
+            width :200px;
         }
     </style>
 </head>
 <body>
+
 <c:if test="${sessionScope.loginEmail != null}">
     <div class="container" id="inputBoard">
         <button class="btn btn-primary" onclick="boardFn()">글쓰기</button>
         <button class="btn btn-primary" onclick="mainFn()">마이페이지</button>
+        <form action="/board/search" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <div class="input-group">
+                <select name="type" class="select form-select">
+                    <option value="boardTitle" selected>제목</option>
+                    <option value="boardWriter" selected>작성자</option>
+                </select>
+                <input type="search" name="q" id="searchBoard" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+                <button class="btn btn-success">검색</button>
+            </div>
+        </form>
     </div>
 </c:if>
 <div class="container" id="list">

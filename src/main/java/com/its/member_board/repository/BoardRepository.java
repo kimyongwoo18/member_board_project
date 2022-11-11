@@ -40,4 +40,20 @@ public class BoardRepository {
     public void saveFileName(BoardDTO boardDTO) {
         sql.insert("Board.saveFile", boardDTO);
     }
+
+    public BoardDTO findByEmailMax(String boardWriter) {
+        return sql.selectOne("Board.findByEmailMax", boardWriter);
+    }
+
+    public void update(BoardDTO boardDTO) {
+        sql.update("Board.update",boardDTO);
+    }
+
+    public void delete(Long id) {
+        sql.delete("Board.delete",id);
+    }
+
+    public List<BoardDTO> search(Map<String, String> searchParams) {
+        return sql.selectList("Board.search", searchParams);
+    }
 }

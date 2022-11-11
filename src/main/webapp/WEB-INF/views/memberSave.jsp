@@ -25,9 +25,9 @@
     <form action="/memberSave" method="post" name="saveForm" id="saveForm" enctype="multipart/form-data">
         <input type="text" class="form-control mb-2" id="memberEmail" name="memberEmail" placeholder="이메일 입력" onblur="emailCheck()">
         <h6 id="emailCheckResult"></h6>
-        <input type="password" class="form-control mb-2" id="memberPassword" name="memberPassword" placeholder="비밀번호 입력">
+        <input type="password" class="form-control mb-2" id="memberPassword" name="memberPassword" placeholder="비밀번호 입력" minlength="5" maxlength="15">
         <input type="text" class="form-control mb-2" id="memberName" name="memberName" placeholder="이름 입력">
-        <input type="text" class="form-control mb-2" id="memberMobile" name="memberMobile" placeholder="전화번호 입력">
+        <input type="text" class="form-control mb-2" id="memberMobile" name="memberMobile" placeholder="전화번호 입력" size="11">
         <input type="file" class="form-control mb-2" id="memberProfile" name="memberProfile">
         <input type="button"  onclick="saveFn()" class="btn btn-primary form-control mb-2" value="가입">
     </form>
@@ -36,17 +36,27 @@
 
 <script>
     const saveFn = () => {
-        if(document.getElementById("memberEmail").value==""){
-            alert("이메일을 입력해주세요")
+        const email = document.getElementById("memberEmail").value;
+        const password = document.getElementById("memberPassword").value;
+        const name = document.getElementById("memberName").value;
+        const mobile = document.getElementById("memberMobile").value;
+        //정규식 패턴
+        const exp_email = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+        const exp_password = /^(?=.*[a-z])(?=.*\d)(?=.*[A-Z])(?=.*[-_!#])[-_!#A-Za-z\d]{5,15}$/;
+        const exp_name =  /^[가-힣]{2,4}$/;
+        const exp_mobile = /^\d{3}-\d{4}-\d{4}$/;
+
+        if(!email.match(exp_email)){
+            alert("이메일을 형식에 맞게 입력해주세요 [영어소문자,숫자]@[영어소문자].[영어소문자2~3글자]")
             return false;
-        }else if(document.getElementById("memberPassword").value==""){
-            alert("비밀번호를 입력해주세요")
+        }else if(!password.match(exp_password)){
+            alert("비밀번호를 형식에 맞게 입력해주세요 5~15글자 영어 대소문자 특수문자 -_!# 사용 ")
             return false;
-        }else if(document.getElementById("memberName").value==""){
-            alert("이름을 입력해주세요")
+        }else if(!name.match(exp_name)){
+            alert("이름을 형식에 맞게 입력해주세요 2~4글자 한글")
             return false;
-        }else if(document.getElementById("memberMobile").value==""){
-            alert("전화번호를 입력해주세요")
+        }else if(!mobile.match(exp_mobile)){
+            alert("전화번호를 형식에 맞게 입력해주세요 000-0000-0000 ")
             return false;
         }else{
             console.log("제출")

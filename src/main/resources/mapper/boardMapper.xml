@@ -28,4 +28,17 @@
         insert into board_file_table2(originalFileName, storedFileName, boardId)
         values(#{originalFileName},#{storedFileName}, #{id})
     </insert>
+    <select id="findByEmailMax" resultType="boardDTO">
+        select * from board_table2 where boardWriter=#{boardWriter} order by id desc limit 1;
+--         해당 아이디로 작성한것중에 가장 id값이 최신인것.
+    </select>
+    <update id="update" parameterType="boardDTO">
+        update board_table2 set boardTitle = #{boardTitle} , boardContents =#{boardContents}, fileAttached=#{fileAttached} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="Long">
+        DELETE FROM board_table2 WHERE id = #{id};
+    </delete>
+    <select id="search" parameterType="java.util.HashMap" resultType="boardDTO">
+        select * from board_table2 where ${type} like concat('%', #{q}, '%') order by id desc
+    </select>     <!--컬럼이름을 변수처럼 바꾸고싶으면 $를 써야한다.-->
 </mapper>

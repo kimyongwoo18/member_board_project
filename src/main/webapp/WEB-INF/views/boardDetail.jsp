@@ -39,7 +39,7 @@
       <th>조회수</th>
       <td>${board.boardHits}</td>
     </tr>
-    <c:if test="${board.storedFileName != null}">
+    <c:if test="${board.fileAttached == 1}">
       <tr>
         <th>첨부파일</th>
         <td>

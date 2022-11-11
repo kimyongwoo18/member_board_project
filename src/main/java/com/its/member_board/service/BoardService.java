@@ -75,12 +75,35 @@ public class BoardService {
             String savePath = "D:\\spring_img\\" + storedFileName; //5.
             boardFile.transferTo(new File(savePath));//6.
             boardDTO.setFileAttached(1);
-            BoardDTO savedBoard = boardRepository.save(boardDTO); //7.
-            boardRepository.saveFileName(savedBoard);
+            //여기에는 어차피 저장한 값이 올라가니까 돌아오는것은 특정한 값일것이다.
+            //올린 글 중에 가장 최신일것이므로 maxid값을 가져와서 그 값을 데이터로 넣는다?
+            boardRepository.save(boardDTO); //7.
+//            저장하고 돌아온 데이터중에서 id값을 추출하고 그 아이디값을 boardId에 넣고 보드데이터 저장.
+            BoardDTO recentBoard =boardRepository.findByEmailMax(boardDTO.getBoardWriter());
+            //특정 아이디를 찾기위해서 해당 이메일로 저장된 값중에 가장 최신의 글의id값을 가져온다.(id값만 가져오면 되는데 굳이 다 가져오긴했다)
+            boardDTO.setId(recentBoard.getId());
+            boardRepository.saveFileName(boardDTO);
         } else {
             System.out.println("파일없음");
             boardDTO.setFileAttached(0);
             boardRepository.save(boardDTO);
         }
+    }
+
+    public void update(BoardDTO boardDTO) {
+        boardRepository.update(boardDTO);
+    }
+
+    public void delete(Long id) {
+        boardRepository.delete(id);
+    }
+
+    public List<BoardDTO> search(String type, String q) {
+        Map<String, String> searchParams = new HashMap<>();
+        searchParams.put("type",type);
+        searchParams.put("q",q);
+        List<BoardDTO> searchList = boardRepository.search(searchParams);
+        return searchList;
+
     }
 }
