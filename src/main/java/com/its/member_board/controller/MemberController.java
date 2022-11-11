@@ -68,6 +68,13 @@ public class MemberController {
             return "index";
         }
     }
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+
+        session.invalidate();
+        return "index";
+
+    }
 
     @GetMapping("/member/")
     public String findAll(Model model,

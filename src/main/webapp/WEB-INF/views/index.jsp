@@ -28,11 +28,17 @@
 <c:if test="${sessionScope.loginEmail != null}">
     <h6>${sessionScope.loginName}님 환영합니다.</h6>
 </c:if>
-    <button class="btn btn-primary" onclick="saveFn()">회원가입</button>
-    <button class="btn btn-secondary" onclick="loginFn()">로그인</button>
-    <c:if test="${sessionScope.loginEmail != null}">
-        <button class="btn btn-success" onclick="listFn()">글목록</button>
+    <c:if test="${sessionScope.loginEmail == null}">
+        <button class="btn btn-primary" onclick="saveFn()">회원가입</button>
+        <button class="btn btn-secondary" onclick="loginFn()">로그인</button>
+
     </c:if>
+    <c:if test="${sessionScope.loginEmail != null}">
+
+        <button class="btn btn-success" onclick="listFn()">글목록</button>
+        <button class="btn btn-danger" onclick="logout()">로그아웃</button>
+    </c:if>
+
 </div>
 
 </body>
@@ -45,6 +51,9 @@
     }
     const listFn = () => {
         location.href = "/board/";
+    }
+    const logout = () => {
+      location.href = "/logout";
     }
 </script>
 </html>

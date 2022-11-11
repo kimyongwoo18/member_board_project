@@ -53,7 +53,7 @@
     <button class="btn btn-success" onclick="updateFn()">수정</button>
     <button class="btn btn-danger" onclick="deleteFn()">삭제</button>
   </c:if>
-  <c:if test="${sessionScope.loginName == 'admin'}">
+  <c:if test="${sessionScope.loginEmail == 'admin'}">
     <button class="btn btn-danger" onclick="deleteFn()">삭제</button>
   </c:if>
 </div><div class="container mt-5" id="comment-write" >

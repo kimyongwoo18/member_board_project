@@ -22,26 +22,27 @@
     <h3>회원정보 수정</h3>
     <h4>수정 가능한 정보는 비밀번호와 휴대전화번호와 프로필사진입니다.</h4>
     <form action="/member/update" method="post" name="updateForm" enctype="multipart/form-data">
-
-        <input type="text" class="form-control" placeholder="기존 이메일 : ${member.memberEmail}" readonly>
+        <input type="hidden" name="id" value="${member.id}">
+        <input type="text" class="form-control" name="memberEmail" value="${member.memberEmail}" readonly>
         <input type="password"  name="beforePassword" id="beforePassword"
                class="form-control" placeholder="기존 비밀번호">
         <input type="password" name="memberPassword" class="form-control" placeholder="새로운 비밀번호">
-        <input type="text" name="memberMobile" class="form-control" placeholder="기존 전화번호 : ${member.memberMobile}">
+        <input type="text" name="memberMobile" class="form-control" value="${member.memberMobile}">
         <img src="${pageContext.request.contextPath}/upload/${member.storedFileName}"
              alt="" width="100" height="100">
         <input type="file" name="memberProfile" class="form-control">
-        <input type="button" onclick="update()" class="btn btn-success" value="수정">
+        <input type="button" onclick="update()" class="btn btn-success" value="수정" >
     </form>
     <button href="/">초기화면으로</button>
 </div>
 </body>
 <script>
     const update = () => {
-      if(document.getElementById("beforePassword").value == ${member.memberPassword}){
-          document.updateForm.submit();
+      if(document.getElementById("beforePassword").value != "${member.memberPassword}"){
+          alert("기존비밀번호가 일치하지않습니다.");
+          return false;
       }else{
-          alert("기존비밀번호가 일치하지않습니다.")
+          document.updateForm.submit();
       }
     }
 </script>
