@@ -21,6 +21,7 @@
 <body>
 <div class="container" id="page">
 <button class="btn btn-success" onclick="memberList()">회원목록</button>
+    <button class="btn btn-success" onclick="listFn()">글목록</button>
 
 </div>
 </body>
@@ -28,6 +29,9 @@
     const memberList = () => {
 
       location.href="/member/"
+    }
+    const listFn = () => {
+        location.href = "/board/";
     }
 </script>
 </html>

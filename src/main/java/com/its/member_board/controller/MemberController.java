@@ -65,7 +65,7 @@ public class MemberController {
                 return "index";
             }
         }else{
-            return "index";
+            return "memberLogin";
         }
     }
     @GetMapping("/logout")
